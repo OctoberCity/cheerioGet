@@ -4,13 +4,18 @@
 爬取boss直聘的数据，目的在于整合过去用过却没有做成项目的技能，主要用到cheerio+mongodb+Echarts+koa
 
 #### 软件架构
+
 软件架构说明
 
 
 #### 安装教程
 
 1. npm install
-2. node index.js
+2. npm run dev
+
+#### 项目打包
+
+1. npm run build
 
 #### 使用说明
 
