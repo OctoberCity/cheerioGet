@@ -4,9 +4,9 @@ const database =require("./db/database.js");
 const util = require("./initUtil/initUtil.js");
 
 const app =new koa();
-// staticData.cityList();
-// staticData.postionList();
-// staticData.oldindustryList();
+staticData.cityList();
+staticData.postionList();
+staticData.oldindustryList();
 
 //清除集合
 // database.cleanCollection();
