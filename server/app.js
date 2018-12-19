@@ -1,25 +1,39 @@
-const koa =require("koa");
-const staticData= require("./initUtil/initjson.js");
-const database =require("./db/database.js");
-const util = require("./initUtil/initUtil.js");
-
-const app =new koa();
-// staticData.cityList();
-// staticData.postionList();
-// staticData.oldindustryList();
-
-//清除集合
-// database.cleanCollection();
- 
-//测试插入每页数据到数据库
-// const  url ="https://www.zhipin.com/c101210100/h_101210100/?query=nodejs&page=1&ka=page-1";
-
-// util.insertOnePageInfo(url);
+const koa = require("koa");
+const app = new koa();
+const koaBody = require('koa-body');
+const router = require("koa-route");
+const mongoose = require("mongoose");
+const config = require("./config/config-default");
+mongoose.connect('mongodb://localhost:27017/bishe2');
+const paramsList = require("./controller/paramsList");
+const page = require('./controller/page');
+app.use(koaBody());
+app.use(async (ctx, next) => {
+    ctx.config = config;
+    await next();
+});
 
 
-util.buildURl();
+// 获得数据参数列表
+app.use(router.get('/getParams', paramsList.getparamsByJson));
+
+// 删除三个参数数据
+app.use(router.post('/delParams', async (ctx) => {
+    await ctx.render('list', {});
+}));
+
+// 更新三个参数数据 
+app.use(router.post('/upParams', async (ctx) => {
+    await ctx.render('list', {});
+}));
+
+// 更新数据核心功能通过三个参数
+app.use(router.get('/upParams',page.pushPageData));
 
 
 
 
-app.listen(13126);
+
+app.listen(8081, () => {
+    console.log("已经启动了");
+});

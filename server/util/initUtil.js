@@ -11,14 +11,12 @@ exports.insertOnePageInfo=url=>{
    // 常规的错误处理
    if (err) {
      return next(err);
-   } 
-   console.log("-------");
+   }  
    const $ = cheerio.load(sres.text);
    const items = [];
    $('.job-list li').each(function (idx, element) {
      const $element = $(element);
-     const infoObj={}; 
-        console.log("11111111111");
+     const infoObj={};
      //TODO数据还没有详细分开
     $element.find($('.info-company   em')).text(',');//添加分隔符将em标签变成','
     $element.find($('.info-primary   em')).text(',');//添加分隔符将em标签变成','
@@ -103,9 +101,7 @@ results[0].forEach((item,index)=>{
       city.push(item.code);
     });
 });
-
-console.log("城市数量",city.length);
-console.log("职位",position.length);
+ 
 return {city:city,position:position};
 })
 //拼凑url
