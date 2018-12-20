@@ -16,7 +16,9 @@ exports.pushPageData = async (ctx) => {
         });
         array.push(city);
     } 
+    //取得了以省为基础的城市
     array = getall(array, []); 
+
 
 }
 
