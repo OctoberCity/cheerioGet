@@ -5,8 +5,10 @@ exports.superproxy = (url) => {
         superagent.get(url)
             .end(function (err, sres) {
                 if (err) {
-                    reject(err);
-                }
+                    resolve(err);
+
+//                    reject(err);
+                } 
                 resolve(sres);
             });
     });
