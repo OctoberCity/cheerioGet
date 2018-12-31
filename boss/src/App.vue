@@ -26,5 +26,14 @@ export default {
 	color:#444;
     width: 100%;
   }
+  ul,body,div,p,img,span,td,tr{
+      padding:0px;
+      margin:0px;
+  }
+  li{
+      padding:0px;
+      margin: 0px;
+      list-style-type: none;
+  }
 
 </style>

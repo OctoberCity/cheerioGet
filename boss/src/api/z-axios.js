@@ -1,6 +1,6 @@
 import axios from 'axios'
 const baseURL = '127.0.0.1:7001'// 后端服务IP地址，前端默认8080
-export function get (url, data, responseType) {
+exports.get = (url, data, responseType) => {
   return new Promise((resolve, reject) => {
     axios({
       method: 'get',
