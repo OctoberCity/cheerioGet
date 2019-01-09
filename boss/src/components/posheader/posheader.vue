@@ -31,12 +31,11 @@ export default {
       }] // 用户期望的数据列表
     }
   },
-  created: {
+  created () {
 
   },
   methods: {
     selectWangWork (item) {
-      console.log(item)
       this.selectItem = item.position
       this.$emit('want-change', item)
     }

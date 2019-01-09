@@ -18,8 +18,10 @@
     "cheerio": "^1.0.0-rc.2",
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
+    "koa-cors": "^0.0.16",
     "koa-route": "^3.2.0",
     "mongoose": "^5.4.0",
+    "nodemon": "^1.18.9",
     "superagent": "^3.8.3"
   }
 }

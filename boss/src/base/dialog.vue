@@ -1,6 +1,6 @@
 <template>
   <div class="dialog">
-    <el-dialog :visible.sync="dialogVisible" width="100%" top="100px" modal-append-to-body="false" :before-close="handleClose">
+    <el-dialog :visible.sync="dialogVisible" width="100%" top="100px"  :before-close="handleClose">
       <slot></slot>
       <div class="foot-body">
         <div class="self-botton-cancel " @click="handleClose">取 消</div>
@@ -30,8 +30,7 @@ export default {
       this.handleClose()
       this.$emit('commitQuery')
     }
-  },
-  watch () {}
+  }
 }
 
 </script>
@@ -50,10 +49,10 @@ export default {
     padding:5px 0;
   }
   .self-botton-commit {
-    background: #4fc08d;
+    background: #53cac4;
     color: #fff;
     width: 50%;
-    padding:5px 0;
+    padding:10px 0;
 
   }
 

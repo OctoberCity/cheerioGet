@@ -1,11 +1,12 @@
 // 对搜索参数进行数据操作
 const proxyUtil = require("../util/proxyUtil");  
 const AnyModel = require("../model/index");
+const configparam =require("../config/config-param");
 
 
 
 
-// 爬取配置文件
+// 爬取配置参数
 exports.getparamsByJson = async (ctx) => {
     const {
         param
@@ -24,25 +25,23 @@ exports.getparamsByJson = async (ctx) => {
     }
     ctx.body=res;
 }
-
-//从数据库查找数据
-exports.findOneBycode =async(ctx)=>{
-     const {codes}=ctx.query;
-     const anyModel = new AnyModel(cityModel);
-     const result =  await anyModel.findone();
-
-
-}
+ 
 
 
 // 取得city , position ,oldindustry，页面获取参数要用
-exports.searchParams =async(ctx)=>{
+exports.searchDBParams =async(ctx)=>{
     const {
         param
-    } = ctx.query; 
+    } = ctx.query;  
     const anyModel = new AnyModel(param); 
-    const alldata = await anyModel.findone();
+    const alldata = await anyModel.find();
     ctx.body=alldata;
+}
+
+
+// 获取配置文件，薪资，规模，融资等情况参数列表
+exports.searchParams =async(ctx)=>{
+    ctx.body = configparam;
 }
 
  

@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import TitleHeader from '../../posheader/titleheader.vue'
+import TitleHeader from 'posheader/titleheader.vue'
 export default{
   components: {
     TitleHeader

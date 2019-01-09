@@ -4,12 +4,7 @@ class anyModel {
     constructor(name) {
         this.name = name;
         this.model = getModelbyName(name);
-    }
-    getModel() {
-        const schema = require(`./${this.name}`);
-        var oldindustryModel = mongoose.model("oldinsustry", schema);
-        return oldindustryModel;
-    }
+    } 
     find(option) {
         return new Promise((resolve, reject) => {
             this.model.find(option, (error, doc) => {
@@ -28,6 +23,17 @@ class anyModel {
                 }
                 resolve(doc);
             });
+        });
+    }
+    // 多表关联操作
+    findByPopulate(option,popOption){
+        return new Promise((resolve,reject)=>{
+            this.model.find(option)
+                .populate(popOption)
+                .exec((err,data)=>{ 
+                    if(err)reject(err);
+                     resolve(data);
+                }); 
         });
     }
 }

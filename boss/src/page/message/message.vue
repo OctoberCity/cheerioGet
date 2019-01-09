@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import AnvBottom from '../../components/anvbottom/anvbottom.vue'
+import AnvBottom from 'components/anvbottom/anvbottom.vue'
 export default {
   components: {
     AnvBottom
