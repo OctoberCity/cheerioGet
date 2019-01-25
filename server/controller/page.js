@@ -1,6 +1,4 @@
- const AnyModel = require("../model/index");
- const proxyUtil = require("../util/proxyUtil");
- const async = require("async");
+ const AnyModel = require("../model/index"); 
 
 
  // 更具所选的城市开始爬取城市的数据 ,

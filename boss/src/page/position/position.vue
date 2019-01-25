@@ -93,13 +93,13 @@
         }
       },
       _getpositionData() {
-        get('/searchPosition',this.nowParam).then((res) => {
+        get('/position/searchPosition',this.nowParam).then((res) => {
             console.log(res)
           this.positionData = res.data;
         });
       },
       _getparamRequire() {
-        get('/getParam').then((res) => {
+        get('/cheerioParam/searchParams').then((res) => {
           // 公司的参数
           this.param.paramCompany.push(res.data.financing);
           this.param.paramCompany.push(res.data.scale);
@@ -111,7 +111,7 @@
         });
       },
       _getparamOldIndustry() {
-        get('/getDBParam', {
+        get('/cheerioParam/getDBParam', {
           param: 'oldindustry'
         }).then((res) => {
           const oldindustry = {

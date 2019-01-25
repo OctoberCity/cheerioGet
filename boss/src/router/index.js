@@ -33,7 +33,11 @@ export default new Router({
     {
       path: '/mytable',
       component: MyTable
-    }
+    },
+    {  //微简历
+         path: '/littleresume',
+        component: MyTable
+    },
 
   ]
 })

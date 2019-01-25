@@ -19,6 +19,7 @@ exports.getparamsByJson = async (ctx) => {
     if(result.length){
      res.code=1001;
      res.message=`爬取${param}成功`;
+     res.data=result;
     }else{
         res.code=1001;
         res.message=`爬取${param}失败`;  

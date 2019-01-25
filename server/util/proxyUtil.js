@@ -1,6 +1,7 @@
 const superagent = require("superagent");
 // 处理代理
 exports.superproxy = (url) => {
+    console.log(url);
     return new Promise((resolve, reject) => {
         superagent.get(url)
             .end(function (err, sres) {

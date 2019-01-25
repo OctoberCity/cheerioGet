@@ -24,7 +24,7 @@
     },
     mounted() {
       this.$nextTick(() => {
-        get('getDBParam', {
+        get('/cheerioParam/getDBParam', {
           param: 'city'
         }).then((res) => {
           this.cityDataList = res.data;
