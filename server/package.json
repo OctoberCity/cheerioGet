@@ -16,9 +16,12 @@
   "dependencies": {
     "async": "^2.6.1",
     "cheerio": "^1.0.0-rc.2",
+    "jsonwebtoken": "^8.4.0",
+    "jwt-simple": "^0.5.5",
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
     "koa-cors": "^0.0.16",
+    "koa-jwt": "^3.5.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.0",
     "superagent": "^3.8.3"

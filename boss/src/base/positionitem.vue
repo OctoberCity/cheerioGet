@@ -79,7 +79,7 @@ export default {
 
   .position-reuiqre span {
     margin-right: 10px;
-    background-color: #cacaca;
+    background-color: #E8E3E2;
     border-radius: 3px;
   }
 

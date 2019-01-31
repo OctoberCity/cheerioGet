@@ -79,8 +79,6 @@ exports.searchPosition = async (ctx) => {
         return newitem;
 
     });
-    ctx.body = newresult;
-
-
-
+    const res={data:newresult,msg:"获取参数成功",code:1001}
+    ctx.body = res; 
 }

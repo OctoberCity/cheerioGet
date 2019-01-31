@@ -5,19 +5,12 @@ const router =require('koa-router')();
 const controller = require("../controller/user");
 
 //  //登录
-// router.post('/login', controller.userlogin);
+router.post('/login', controller.userlogin);
 
-// // 注册
-// router.post('/register',controller.register );
+// 注册
+router.post('/register',controller.userRegister );
 
-// // 上传简历pdf
-// router.post('/resume', controller.uploadResume);
-
-// // 获取简历列表
-// router.get('/resume', controller.getResumeList);
-
-// // 删除简历
-// router.post('/resume', controller.getResumeList);
+ 
 
  
 // //  添加求职意向

@@ -40,6 +40,9 @@ module.exports = {
       'components':resolve('src/components'),
       'base':resolve('src/base'),
       'page':resolve('src/page'),
+    //  'stores':resolve('src/store')
+
+
 
 
 

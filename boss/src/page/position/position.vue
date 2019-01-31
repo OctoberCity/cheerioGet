@@ -92,9 +92,9 @@
           this.thatDialog[index] = false
         }
       },
-      _getpositionData() {
+      _getpositionData() { 
         get('/position/searchPosition',this.nowParam).then((res) => {
-            console.log(res)
+            console.log("hjwhjwhjwhjwhwjhwjh");
           this.positionData = res.data;
         });
       },

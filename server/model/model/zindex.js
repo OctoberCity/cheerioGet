@@ -4,6 +4,7 @@ const oldindustry = require("./oldindustry");
 const hr = require("./hr");
 const company = require("./company");
 const workpos = require("./workpos");
+const user =require("./user");
 
 
 
@@ -15,7 +16,8 @@ module.exports = (name) => {
         oldindustry,
         workpos,
         company,
-        hr
+        hr,
+        user
     } 
    return modellist[name];
 }

@@ -15,9 +15,30 @@ class anyModel {
             });
         });
     }
+
+    findOne(option) {
+        return new Promise((resolve, reject) => {
+            this.model.findOne(option, (error, doc) => {
+                if (error) {
+                    reject(error);
+                }
+                resolve(doc);
+            });
+        });
+    }
     insertMany(array) {
         return new Promise((resolve, reject) => {
             this.model.insertMany(array, (error, doc) => {
+                if (error) {
+                    reject(error);
+                }
+                resolve(doc);
+            });
+        });
+    }
+    insertOne(obj){
+        return new Promise((resolve, reject) => {
+            this.model.create(obj, (error, doc) => {
                 if (error) {
                     reject(error);
                 }

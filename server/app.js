@@ -2,12 +2,36 @@ const koa = require("koa");
 const app = new koa();
 const cors = require("koa-cors");
 const koaBody = require('koa-body');
+const koaJwt =require("koa-jwt");
 const router = require("../server/router/z-index");
+const verify =require("./middleware/verify");
 const mongoose = require("mongoose");
 const config = require("./config/config-default");
 mongoose.connect('mongodb://localhost:27017/bishe2');
-
+// 错误处理
+app.use((ctx, next) => {
+    return next().catch((err) => { 
+        if(err.status === 401){ 
+            ctx.body = {code:1004,msg:"请重新登录",data:null};
+        }else{
+            throw err;
+        }
+    })
+});
 app.use(cors());
+app.use(koaJwt({
+    secret: 'tokenhjw'
+}).unless({
+    path: ["/user/login","/user/register"]
+}));
+
+//解析header,将用户信息解析
+app.use(verify);
+
+
+
+
+
 app.use(koaBody({
     multipart: true,
     formidable: {

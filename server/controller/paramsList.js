@@ -36,13 +36,13 @@ exports.searchDBParams =async(ctx)=>{
     } = ctx.query;  
     const anyModel = new AnyModel(param); 
     const alldata = await anyModel.find();
-    ctx.body=alldata;
+    ctx.body={data:alldata,msg:"获取参数成功",code:1001};
 }
 
 
 // 获取配置文件，薪资，规模，融资等情况参数列表
 exports.searchParams =async(ctx)=>{
-    ctx.body = configparam;
+    ctx.body = {data:configparam,msg:"获取参数成功",code:1001};
 }
 
  
