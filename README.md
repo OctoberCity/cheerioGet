@@ -1,36 +1,25 @@
 # cheerioGet
 
 #### 项目介绍
-爬取boss直聘的数据，目的在于整合过去用过却没有做成项目的技能，主要用到cheerio+mongodb+Echarts+koa
-
-#### 软件架构
-
-软件架构说明
-
-
-#### 安装教程
-
-1. npm install
-2. npm run dev
-
-#### 项目打包
-
-1. npm run build
+爬取boss直聘的数据，前后分离，前台使用vue全家桶，后台使用koa,部署使用docker
 
 #### 使用说明
 
-本项目采用前后台分离，前台项目在XXX,后台项目在server中
+本项目采用前后台分离，前台项目在boss,后台项目在server中
 
 1. 启动后台项目
-> npm i
-> node app.js 或者 npm run start
+> cd server
+> node run start
 
-#### 参与贡献
+2. 启动后台项目
+> cd boss
+> node run dev
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+3. 因为加了校验，暂时没写注册功能，可将 校验删除。
+- 前端代码校验注释,在router/index.js将路由守卫注释
+- 后端代码校验注释，在app.js jwt校验部分
+
+ 
 
 
 #### 关于查询连接
@@ -62,6 +51,11 @@ https://www.zhipin.com/job_detail/?query=node.js&scity=100010000&industry=&posit
 
 所以我们的查询请求格式如下
 > 'https://www.zhipin.com/c'+city+'-p'+position+'/h_'+city/?page=num&ka=page-num
+
+- 部分页面展示
+
+![]()
+
 
 
 
