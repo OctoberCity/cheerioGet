@@ -54,7 +54,11 @@ https://www.zhipin.com/job_detail/?query=node.js&scity=100010000&industry=&posit
 
 - 部分页面展示
 
-![]()
+![](https://github.com/OctoberCity/cheerioGet/blob/develop/doc/image/company.png)
+
+![](https://github.com/OctoberCity/cheerioGet/blob/develop/doc/image/position.png)
+
+![](https://github.com/OctoberCity/cheerioGet/blob/develop/doc/image/mytable.png)
 
 
 
