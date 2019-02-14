@@ -5,7 +5,7 @@ import router from "../router"
 var CancelToken = axios.CancelToken
 var source = CancelToken.source()//中断路由跳转的时候没哟完成的请求
 var cancel
-var baseURL = 'http://192.168.17.126:7001'
+var baseURL = 'http://127.0.0.1:7001'
 
 
 // http request 请求拦截器

@@ -18,8 +18,7 @@ exports.searchPosition = async (ctx) => {
         position,
     } = ctx.query;
     const anymodel = new AnyModel('workpos');
-    // const sres = await proxyUtil.superproxy(`https://www.zhipin.com/c${city}-p${position}/h_${city}/?page=1&ka=page-1`);
-    // const positionlist = await util.insertOnePageInfo(sres, city, position);
+    b 
     //取数据库的数据
     const mianoption = {
         positioncode: position

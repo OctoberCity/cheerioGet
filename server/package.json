@@ -24,6 +24,7 @@
     "koa-jwt": "^3.5.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.0",
+    "nodemon": "^1.18.9",
     "superagent": "^3.8.3"
   }
 }

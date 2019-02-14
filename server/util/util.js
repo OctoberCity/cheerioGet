@@ -33,8 +33,7 @@ exports.insertOnePageInfo = async (sres,city,position) => {
      return Promise.all(datalist);
 }
     // 插入数据库操作
-function insertCheerioData(item,workposModel,hrModel,companyModel,city,position){
-    console.log(item);
+function insertCheerioData(item,workposModel,hrModel,companyModel,city,position){ 
         return  companyModel.insertMany({
             companyname: item.companyname,
             companyarea: item.jobInfo[0],

@@ -41,7 +41,7 @@ exports.userlogin= async(ctx)=>{
 // 用户注册
 exports.userRegister= async(ctx)=>{
     const {password,username} = ctx.request.body;
-    const anymodel =new AnyModel('user');
+    const anymodel =new AnyModel('user'); 
     const userResult = await anymodel.insertOne({username,password}); 
     ctx.body={
         code:1001,

@@ -18,6 +18,10 @@ var citySchema = new mongoose.Schema({
     },
     rank: {
         type: String
+    },
+    isHot :{ //是否是热门城市
+        type: Number,
+        default:0
     }
 });
 

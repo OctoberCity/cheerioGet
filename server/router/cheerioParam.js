@@ -13,12 +13,10 @@ router.post('/delParams', async (ctx) => {
 });
 
 // 更新三个参数数据 
-router.post('/upParams', async (ctx) => {
-    await ctx.render('list', {});
-});
+router.post('/upParams',controller.getparamsByJson);
 
  
-//取得city , position ,oldindustry，页面获取参数要用
+//取得city , position ,oldindustry，页面获取参数要用,这些参数从数据库获得
 router.get('/getDBParam', controller.searchDBParams);
 
 

@@ -7,7 +7,7 @@ const router = require("../server/router/z-index");
 const verify =require("./middleware/verify");
 const mongoose = require("mongoose");
 const config = require("./config/config-default");
-mongoose.connect('mongodb://localhost:27017/bishe2');
+mongoose.connect('mongodb://localhost:27017/cheerio');
 // 错误处理
 app.use((ctx, next) => {
     return next().catch((err) => { 
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(koaJwt({
     secret: 'tokenhjw'
 }).unless({
-    path: ["/user/login","/user/register"]
+    path: ["/user/login","/user/register","/cheerioParam/upParams","/cheerio/upParams"]
 }));
 
 //解析header,将用户信息解析

@@ -14,8 +14,17 @@ exports.getparamsByJson = async (ctx) => {
     const res={} 
     const anyModel = new AnyModel(param);
     const sres = await proxyUtil.superproxy(ctx.config[param]); 
-    const cityLsit = getRequestByType(param,sres) ;
-    const result =  await anyModel.insertMany(cityLsit);
+    const paramList = getRequestByType(param,sres); 
+    // let citylist2=0 ;
+    // // 如果是热门城市ishot字段设置1
+    // if(param === 'city'){ 
+    //     citylist2 =paramList.hotcity.map((item)=>{
+    //             item.isHot=1; 
+    //         return  item;
+    //     });
+    //     citylist2=citylist2.concat(paramList.city);
+    // }
+    const result =  await anyModel.insertMany(paramList);
     if(result.length){
      res.code=1001;
      res.message=`爬取${param}成功`;
@@ -50,7 +59,10 @@ exports.searchParams =async(ctx)=>{
 function getRequestByType(type,sres){
     let  result;
     switch(type){
-       case 'city':result=JSON.parse(sres.text).data.cityList;
+       case 'city':
+    //    result={hotcity:0,city:0};
+    //    result.hotcity=JSON.parse(sres.text).data.hotCityList;
+       result=JSON.parse(sres.text).data.cityList; 
        break;
        case 'position':result=JSON.parse(sres.text).data;
        break;
