@@ -15,10 +15,9 @@
           <div class="position-reuiqre">
             <span v-for="(value,key) in item.requires">{{value}}</span>
           </div>
-          <div class="position-hr">
+          <div class="position-hr"  @click.stop="chatpage(item)">
             <img :src="item.hravatar" /><span>{{item.hrname}}</span>
           </div>
-
         </li>
       </ul>
     </router-link>
@@ -34,12 +33,11 @@ export default {
   data () {
     return {}
   },
-  created () {
-    this.test()
+  created () { 
   },
   methods: {
-    test: function () {
-      console.log(this.positionData)
+    chatpage(item) {
+        this.$router.push({path:'/chat',query:{friendId:item.id,friendName:item.hrname,avatar:item.hravatar,positionId:item.id}})
     }
   }
 }

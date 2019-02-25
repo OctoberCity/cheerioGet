@@ -29,6 +29,30 @@
  - companyid   公司id               ObjectId   
 
 
+
+ #####  -resume 简历
+ - resumeName  简历名字             String
+ - resumeSize  简历大小             String
+ - resumeType  简历类型             Number(1:pdf,2:doc,3:docx)//暂时只支持  
+ - uploadTime  简历上传时间         Date
+ - userid      用户id              string 
+ - path        存储路径(包括新的名字)  string 
+ - state       状态（1:存在，0:删除）Number 
+
+
+#####  - userWantPos
+- userid      用户id               objectId
+- citycode    城市code             Number
+- slary       薪资                 Object:{start,end} //是一个范围
+- industry    行业                 string // 暂时没有行业的选项
+- position    职位                 Number // 职业code 
+
+                           
+
+
+
+
+- ### 一下是参数表，由爬取的的文件直接录入
 #### - 行业(参数表)oldindustry
 #### - 城市(参数表)city
 #### - 职位(参数表)position

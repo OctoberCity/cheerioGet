@@ -1,7 +1,4 @@
 //对简历的操作
-/**
- * 该模块是对职位的操作
- */
 const router =require('koa-router')();
 const controller = require("../controller/resume");
 
@@ -9,7 +6,7 @@ const controller = require("../controller/resume");
  router.get('/resumeList',controller.resumelist);
 
 // 上传简历
-router.get('/uploadResume',controller.uploadResume);
+router.post('/uploadResume',controller.uploadResume);
 
 // 修改简历名字
 router.get('/rename',controller.renameResume);

@@ -6,14 +6,14 @@
  // 更具所选的城市开始爬取城市的数据 ,
  exports.pushPageData = async (ctx) => {
      const {
-         param,
-         modelname
+         city
      } = ctx.query;
-     let num =0;
-     const params = param.split(","); 
+    //  let num =0;
+     const params = city.split(","); 
      //获取热门城市对象
     //  const hotcity = await new AnyModel('city').find({isHot:1}); 
-     const cityCode = await getAllCode(params, modelname); 
+     const cityCode = await getAllCode(params,  "city"); 
+     console.log(city);
      const allPosition = await getAllCode([1], "position");
      const urls = [];
      const paramlist =[];
@@ -40,13 +40,15 @@
      const anyModel = new AnyModel(modelName); 
      let array = [];
      for (let i = 0; i < paramArray.length; i++) {
+         console.log("limian");
+         console.log(i);
          const option = paramArray[i] === 1 ? {} : {
              code: Number(paramArray[i])
          }; 
          const param = await anyModel.find(option); 
          array = array.concat(param);
-     }
-     array = getall(array, []);
+     } 
+     array = getall(array, []);  
      return array;
  }
 

@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
     },
     tel:{
         type:String
-    }
+    } 
 });
 
 //通过草稿建造模型peoplemodule

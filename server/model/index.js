@@ -5,6 +5,18 @@ class anyModel {
         this.name = name;
         this.model = getModelbyName(name);
     } 
+    
+    update(query,setoption){
+        // option + setoption
+        return new Promise((resolve, reject) => {
+            this.model.update(query,{$set:setoption}, (error, doc) => {
+                if (error) {
+                    reject(error);
+                }
+                resolve(doc);
+            });
+        }); 
+    }  
     find(option) {
         return new Promise((resolve, reject) => {
             this.model.find(option, (error, doc) => {

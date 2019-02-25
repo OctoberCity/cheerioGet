@@ -4,8 +4,8 @@ const AnyModel = require("../model/index");
 
 exports.userlogin= async(ctx)=>{
     const {password,username} = ctx.request.body;
-    const anymodel =new AnyModel('user');
-    const userResult = await anymodel.findOne({username}); 
+    const anymodel =new AnyModel('user'); 
+    const userResult = await anymodel.findOne({username});  
     if(userResult === null){
         //没有该用户
         ctx.body={
@@ -27,7 +27,8 @@ exports.userlogin= async(ctx)=>{
         const token = jwt.sign({user:userResult}, 'tokenhjw', { expiresIn: '2h' });
         const userInfo ={
             avator:userResult.avator,
-            username
+            username,
+            userId:userResult._id
         }
         // 返回   
         ctx.body={

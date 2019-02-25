@@ -16,6 +16,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "cheerio": "^1.0.0-rc.2",
+    "ioredis": "^4.6.2",
     "jsonwebtoken": "^8.4.0",
     "jwt-simple": "^0.5.5",
     "koa": "^2.5.3",
@@ -25,6 +26,7 @@
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.0",
     "nodemon": "^1.18.9",
+    "socket.io": "^2.2.0",
     "superagent": "^3.8.3"
   }
 }

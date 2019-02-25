@@ -94,8 +94,7 @@
       },
       _getpositionData() { 
         get('/position/searchPosition',this.nowParam).then((res) => {
-            console.log("hjwhjwhjwhjwhwjhwjh");
-          this.positionData = res.data;
+           this.positionData = res.data;
         });
       },
       _getparamRequire() {

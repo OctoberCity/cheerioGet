@@ -5,6 +5,10 @@ const hr = require("./hr");
 const company = require("./company");
 const workpos = require("./workpos");
 const user =require("./user");
+const message =require("./message");
+const resume =  require('./resume');
+const userWantPos = require('./userWantPos');
+
 
 
 
@@ -17,7 +21,10 @@ module.exports = (name) => {
         workpos,
         company,
         hr,
-        user
+        user,
+        message,
+        resume,
+        userWantPos
     } 
    return modellist[name];
 }

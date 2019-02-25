@@ -17,8 +17,7 @@ exports.searchPosition = async (ctx) => {
         city,
         position,
     } = ctx.query;
-    const anymodel = new AnyModel('workpos');
-    b 
+    const anymodel = new AnyModel('workpos'); 
     //取数据库的数据
     const mianoption = {
         positioncode: position
@@ -33,9 +32,10 @@ exports.searchPosition = async (ctx) => {
         }
     };
     const result = await anymodel.findByPopulate(mianoption, popoption)
-    const newresult = result.map((item) => {
+    const newresult = result.map((item) => {  
         // 解构赋值
         const {
+            _id,
             name: name,
             slary: slary,
             hrid: {
@@ -63,6 +63,7 @@ exports.searchPosition = async (ctx) => {
             }
         } = item;
         const newitem = {
+            id:_id,
             name,
             slary,
             companyname,

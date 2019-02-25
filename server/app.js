@@ -7,7 +7,8 @@ const router = require("../server/router/z-index");
 const verify =require("./middleware/verify");
 const mongoose = require("mongoose");
 const config = require("./config/config-default");
-mongoose.connect('mongodb://localhost:27017/cheerio');
+const chat =require("./util/chat");
+mongoose.connect('mongodb://localhost:27017/bishe2');
 // 错误处理
 app.use((ctx, next) => {
     return next().catch((err) => { 
@@ -19,18 +20,14 @@ app.use((ctx, next) => {
     })
 });
 app.use(cors());
-app.use(koaJwt({
-    secret: 'tokenhjw'
-}).unless({
-    path: ["/user/login","/user/register","/cheerioParam/upParams","/cheerio/upParams"]
-}));
+// app.use(koaJwt({
+//     secret: 'tokenhjw'
+// }).unless({
+//     path: ["/user/login","/user/register","/cheerioParam/upParams","/cheerio/upParams"]
+// }));
 
-//解析header,将用户信息解析
-app.use(verify);
-
-
-
-
+// //解析header,将用户信息解析
+// app.use(verify);
 
 app.use(koaBody({
     multipart: true,
@@ -46,6 +43,10 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(7001, () => {
+const server=app.listen(7001, () => {
     console.log("已经启动了");
 });
+
+
+// //执行聊天监听
+chat(server);
