@@ -9,7 +9,7 @@
         <li @click="showDialog('require')">要求<i class="el-icon-caret-bottom"></i></li>
       </ul>
     </div>
-    <position-list :positionData="positionData"></position-list>
+    <position-list   v-loading="loading"  :positionData="positionData"></position-list>
     <anv-bottom></anv-bottom>
     <v-dialog :dialogVisible="thatDialog.recommend" @on-close='closedDialog'>
       <select-list @on-change='selectLsit(e)' :selectList="selectListData"></select-list>
@@ -37,7 +37,7 @@
   } from 'api'
   import SelectSeaParam from 'components/selectseaparam/selectseaparam.vue'
   import SelectCity from 'components/selectseaparam/selectcity.vue'
-  import SelectList from 'components/selectseaparam/selectlist.vue'
+  import SelectList from 'components/selectseaparam/selectlist.vue' 
 
 
   export default {
@@ -68,6 +68,7 @@
           paramCompany: [],
           paramRequire: []
         },
+        loading:true
       }
     },
     components: {
@@ -95,6 +96,7 @@
       _getpositionData() { 
         get('/position/searchPosition',this.nowParam).then((res) => {
            this.positionData = res.data;
+           this.loading=false;
         });
       },
       _getparamRequire() {

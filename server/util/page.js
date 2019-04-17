@@ -1,19 +1,11 @@
  const AnyModel = require("../model/index"); 
- const  {insertOnePageInfo} =require('../util/util');
- const   {superproxy} =require("../util/proxyUtil");
+ const  {insertOnePageInfo} =require('./util');
+ const   {superproxy} =require("./proxyUtil");
 
 
  // 更具所选的城市开始爬取城市的数据 ,
- exports.pushPageData = async (ctx) => {
-     const {
-         city
-     } = ctx.query;
-    //  let num =0;
-     const params = city.split(","); 
-     //获取热门城市对象
-    //  const hotcity = await new AnyModel('city').find({isHot:1}); 
-     const cityCode = await getAllCode(params,  "city"); 
-     console.log(city);
+ exports.getAllUrlByCity = async (city) => { 
+     const cityCode = await getAllCode(city,  "city");  
      const allPosition = await getAllCode([1], "position");
      const urls = [];
      const paramlist =[];
@@ -22,16 +14,24 @@
             paramlist.push({city:itemc,position:itemp});
              urls.push(`https://www.zhipin.com/c${itemc}-p${itemp}/?page=1&ka=page-1`);
          });
-     });
-     ctx.body=urls;
-     //对所有的urls进行链式处理boss直聘对访问ip限制非常小，所以使用一个处理完之后在处理的方法，以后进行修改
-    //  const finallResult = urls.reduce(function(result,url){
-    //      num++;
-    //      return result.then( superproxy(url).then((sres)=>{
-    //      return  insertOnePageInfo(sres,paramlist[num].city,paramlist[num].position);   
-    //     }));
-    // },Promise.resolve());
-    //  ctx.body=urls;
+     }); 
+     return urls;
+ }
+
+ exports.doPushOnePageDateInMD= async (url,redis)=>{
+    return  superproxy(url).then((sres)=>{
+            // 判断此种查询情况有多少页,这个方法没写
+            const haveOtherPage = judgeHaveOtherPage(sres);
+            if(haveOtherPage>1 && url.indexOf('page=1')>0){
+                const OtherUrls =[] ;
+                 for(let i =2 ;i <haveOtherPage ;i++ ){
+                      OtherUrls.push(url.replace('page=1&ka=page-1',`page=${i}&ka=page-${i}`));     
+                 }
+              await redis.lpush(OtherUrls);   
+            }
+            //开始插入数据
+            await insertOnePageInfo(sres); 
+            });
  }
 
 

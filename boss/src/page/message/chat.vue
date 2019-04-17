@@ -4,7 +4,7 @@
       <go-back class="goback"></go-back>
       <p class="friendName" v-if="friend">{{friend.friendName}}</p>
     </div>
-    <div class="messageList">
+    <div class="messageList"   v-loading="loading">
        <message-item  v-if="chatList" v-for="(item,index) in chatList" :message="item" :friend="friend" :key="index"></message-item>      
     </div>
     <div class="write-input">
@@ -29,7 +29,8 @@
         me:null,
         chatContent:null,
         chatType:null,// 聊天类型
-        positionId:null // 工作id
+        positionId:null, // 工作id
+        loading:true
       }
     },
     components: {
@@ -41,8 +42,11 @@
       this._getmeInfo(),
       this.isFirstFriend()
     },
-    destroyed(){ 
-      this.disconnect()  
+    beforeDestroy(){ 
+      this.disconnects()  
+    },
+    destrored(){
+
     },
     methods: {
       _getChatMessageList() {
@@ -62,13 +66,14 @@
           friendId
         }).then((res) => { 
           this.chatList = res.data;
+          this.loading=false;
         });
       },
       _getmeInfo(){
           console.log("获取自己在socket连接之前");
         this.me = this.$store.state.userInfo;  
        },
-      sendMessage(messageType){ 
+      sendMessage(messageType){  
            const messageObj={from:this.me.userId,to:this.friend.friendId,chatContent:this.chatContent,positionId:this.positionId,type:messageType,roleType:this.me.roleType};
            this.$socket.emit("sendMessage",messageObj,(res)=>{
                 if(res.code!==1001)
@@ -78,19 +83,22 @@
        },
        isFirstFriend(){
            //判断是否是第一次与人通话 
-           const  obj ={from:this.me.userId,to:this.friend.friendId};
-           this.$socket.emit('isFirstFriend',obj,(res)=>{ 
+           const  obj ={from:this.me.userId,to:this.friend.friendId,roleType:this.me.userId};
+           this.$socket.emit('isFirstFriend',obj,(res)=>{  
                 if(res.code === 1001)
                 return  this.$socket.emit("initUserLink",obj,(res)=>{
-                    if(res.code === 1001){ 
+                    if(res.code === 1001){  
+                        console.log("211");
                         this.sendMessage(3);
                     }
                 });
            });
        },
-       disconnect(){
+       disconnects(){
            // 断开连接
-           this.$socket.emit('disconnectUser',this.me.userId);
+           this.$socket.emit('disconnectUser',this.me.userId,()=>{
+            console.log("断开连接");
+           });
        }
 
     },

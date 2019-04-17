@@ -1,7 +1,7 @@
 # cheerioGet
 
 #### 项目介绍
-爬取boss直聘的数据，前后分离，前台使用vue全家桶，后台使用koa,部署使用docker
+爬取boss直聘的数据，前后分离，前台使用vue全家桶，后台使用koa2,部署使用docker
 
 #### 使用说明
 

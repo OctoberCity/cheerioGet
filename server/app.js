@@ -7,7 +7,7 @@ const router = require("../server/router/z-index");
 const verify =require("./middleware/verify");
 const mongoose = require("mongoose");
 const config = require("./config/config-default");
-const chat =require("./util/chat");
+const socketIo =require("./util/socketIo");
 mongoose.connect('mongodb://localhost:27017/bishe2');
 // 错误处理
 app.use((ctx, next) => {
@@ -49,4 +49,4 @@ const server=app.listen(7001, () => {
 
 
 // //执行聊天监听
-chat(server);
+socketIo(server);
