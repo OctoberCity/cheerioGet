@@ -1,7 +1,7 @@
 const socket = require('socket.io');
 const Redis = require("ioredis");
 const config = require('./../config/config-default');
-const pageController = require("../controller/page");
+const pageUtil = require("./page");
 const redis = new Redis(config.redis);
 let setIntervalName;
 
@@ -108,7 +108,7 @@ function socketIo(server) {
                     }
                 }); 
             } 
-       const getUrls = await pageController.getAllUrlByCity(param); 
+       const getUrls = await pageUtil.getAllUrlByCity(param); 
                          await redis.lpush('searchDateCompanyList',getUrls);
             // 开始定时获取所有的linkList 
             setIntervalFun(socket); 
@@ -124,7 +124,7 @@ function setIntervalFun(socket) {
                     socket.emit('getDateIsFinish',{code:1001});
                     return clearInterval(setIntervalName);
                 }
-                return pageController.doPushOnePageDateInMD(param,redis);
+                return pageUtil.doPushOnePageDateInMD(param,redis);
             })
             .catch((err) => {
                 console.log(err);

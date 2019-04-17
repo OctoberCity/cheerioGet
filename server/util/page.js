@@ -19,9 +19,9 @@
  }
 
  exports.doPushOnePageDateInMD= async (url,redis)=>{
-    return  superproxy(url).then((sres)=>{
+          const sres = await superproxy(url);  
             // 判断此种查询情况有多少页,这个方法没写
-            const haveOtherPage = judgeHaveOtherPage(sres);
+            const haveOtherPage = await judgeHaveOtherPage(sres);
             if(haveOtherPage>1 && url.indexOf('page=1')>0){
                 const OtherUrls =[] ;
                  for(let i =2 ;i <haveOtherPage ;i++ ){
@@ -31,7 +31,7 @@
             }
             //开始插入数据
             await insertOnePageInfo(sres); 
-            });
+           
  }
 
 
