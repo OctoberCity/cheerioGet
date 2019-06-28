@@ -51,8 +51,7 @@ exports.getChatList = async (ctx) => {
     //     from :_id,
     //     to : friendId
     // };
-    // const chatList= anymodel.find(queryoption);
-
+    // const chatList= anymodel.find(queryoption); 
     // 假数据
     const modat = [];
     for (let i = 0; i < 10; i++) {

@@ -3,7 +3,7 @@
  */
 const router =require('koa-router')();
 const controller = require("../controller/page");
-// 爬取某个城市的所有职业第一页
+// 根据城市来启动爬取数据  
 router.get('/upPositionByCity',controller.pushPageData);
 
 

@@ -6,7 +6,7 @@ const configparam =require("../config/config-param");
 
 
 
-// 爬取配置参数
+// 根据传递的参数获取参数数据（构成查询参数）
 exports.getparamsByJson = async (ctx) => {
     const {
         param
@@ -14,17 +14,8 @@ exports.getparamsByJson = async (ctx) => {
     const res={} 
     const anyModel = new AnyModel(param);
     const sres = await proxyUtil.superproxy(ctx.config[param]); 
-    const paramList = getRequestByType(param,sres); 
-    // let citylist2=0 ;
-    // // 如果是热门城市ishot字段设置1
-    // if(param === 'city'){ 
-    //     citylist2 =paramList.hotcity.map((item)=>{
-    //             item.isHot=1; 
-    //         return  item;
-    //     });
-    //     citylist2=citylist2.concat(paramList.city);
-    // }
-    const result =  await anyModel.insertMany(paramList);
+    const paramList = getRequestByType(param,sres);  
+    const result =  await anyModel.insertMany(paramList); 
     if(result.length){
      res.code=1001;
      res.message=`爬取${param}成功`;

@@ -2,19 +2,25 @@ const koa = require("koa");
 const app = new koa();
 const cors = require("koa-cors");
 const koaBody = require('koa-body');
-const koaJwt =require("koa-jwt");
+const koaJwt = require("koa-jwt");
 const router = require("../server/router/z-index");
-const verify =require("./middleware/verify");
+const verify = require("./middleware/verify");
 const mongoose = require("mongoose");
 const config = require("./config/config-default");
-const chat =require("./util/chat");
-mongoose.connect('mongodb://localhost:27017/bishe2');
+const chat = require("./util/chat");
+const process = require("child_process");
+const workprocess = process.fork("./util/chrriomainprocess.js");
+mongoose.connect('mongodb://192.168.17.180:27018/bishe2'); //docker mongo容器
 // 错误处理
 app.use((ctx, next) => {
-    return next().catch((err) => { 
-        if(err.status === 401){ 
-            ctx.body = {code:1004,msg:"请重新登录",data:null};
-        }else{
+    return next().catch((err) => {
+        if (err.status === 401) {
+            ctx.body = {
+                code: 1004,
+                msg: "请重新登录",
+                data: null
+            };
+        } else {
             throw err;
         }
     })
@@ -32,21 +38,36 @@ app.use(cors());
 app.use(koaBody({
     multipart: true,
     formidable: {
-        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M 文件从request.files
+        maxFileSize: 200 * 1024 * 1024 // 设置上传文件大小最大限制，默认2M 文件从request.files
     }
 }));
 app.use(async (ctx, next) => {
     ctx.config = config;
+    ctx.workprocess = workprocess;
     await next();
 });
 
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-const server=app.listen(7001, () => {
+const server = app.listen(7001, () => {
     console.log("已经启动了");
 });
 
 
 // //执行聊天监听
 chat(server);
+
+
+
+// 与子进程同信
+
+workprocess.on("message",(m) => {
+    console.log("子进程已经成功登陆");
+});
+
+//
+workprocess.send({
+    message: "1111111111111111111",
+    type:1,
+});

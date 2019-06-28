@@ -12,7 +12,7 @@ function chat(server) {
 
         socket.on("join", async (userId) => {
             // 用户上线添加至redis缓存，使用散列key: {userID,socketID}
-            console.log(socket.id);   
+            console.log(socket.id);
             // await redis.hmset('SocketUser',userId,socket.id);
         });
         /**
@@ -27,18 +27,20 @@ function chat(server) {
         socket.on("sendMessage", async (messageObj, fn) => {
             // 判断接收方是否在线
             const result = await redis.hexists('SocketUser', messageObj.to);
-            const rediskey = messageObj.roleType === 1 ?`${messageObj.from }:${messageObj.to}`:`${messageObj.to }:${messageObj.from}`;// 只用一个集合去存储最新消息
+            const rediskey = messageObj.roleType === 1 ? `${messageObj.from }:${messageObj.to}` : `${messageObj.to }:${messageObj.from}`; // 只用一个集合去存储最新消息
             if (result === 0) {
                 // 对方不在修改消息状态,用于提示用户未接受信息
                 redis.hset(rediskey, 'haveNewNews', true);
-                return fn({ code: 1001 });
+                return fn({
+                    code: 1001
+                });
             }
             redis.hset(rediskey, 'haveNewNews', true);
             // 持久化进数据库 
             const message = new AnyModel('message');
             const insetresult = await message.insertOne(messageObj);
             // 发送消息 通过socket.id
-            const tosocketId = await redis.hmget('SocketUser',messageObj.to);
+            const tosocketId = await redis.hmget('SocketUser', messageObj.to);
             socket(tosocketId).emit('sendMessageBySocketId', messageObj);
             //返回给客户端发送消息操作是否成功
             fn({
@@ -46,31 +48,28 @@ function chat(server) {
             });
         });
 
-       /***
-        * 
-        * 断开连接
-        */
+        /***
+         * 
+         * 断开连接
+         */
+        socket.on('disconnectUser', async (userId) => {
+            const dd = await redis.hdel('SocketUser', userId);
+            if (dd) {
+                this.$socket.emit('disconnect');
+            }
+        });
 
-   
-
-       socket.on('disconnectUser', async(userId)=>{
-       console.log("断开连接");
-       const dd= await redis.hdel('SocketUser',userId);
-       console.log(dd);
-       if(dd){
-       this.$socket.emit('disconnect');
-         }  
-       });
- 
         /**
          * 第一次加入的联系人初始化
          * 
-         */ 
+         */
         socket.on("initUserLink", async (Obj, fn) => {
             const date = (new Date()).getTime();
             redis.zadd(Obj.to, date, Obj.from);
             redis.zadd(Obj.from, date, Obj.to);
-            return  fn({code: 1001});
+            return fn({
+                code: 1001
+            });
         });
 
         /** 
@@ -80,8 +79,12 @@ function chat(server) {
             // 判断对方和你是否联系过
             const result = await redis.zrank(Obj.from, Obj.to);
             if (result !== null && typeof result === 'number')
-                return fn({code: 1002 }); //1002代表不是第一次联系 
-                fn({code:1001});
+                return fn({
+                    code: 1002
+                }); //1002代表不是第一次联系 
+            fn({
+                code: 1001
+            });
         });
     });
 

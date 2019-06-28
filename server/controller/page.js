@@ -1,9 +1,9 @@
- const AnyModel = require("../model/index"); 
+ const AnyModel = require("../model/index");  
  const  {insertOnePageInfo} =require('../util/util');
  const   {superproxy} =require("../util/proxyUtil");
 
 
- // 更具所选的城市开始爬取城市的数据 ,
+ // 更具所选的城市开始爬取城市的数据
  exports.pushPageData = async (ctx) => {
      const {
          city
@@ -12,8 +12,8 @@
      const params = city.split(","); 
      //获取热门城市对象
     //  const hotcity = await new AnyModel('city').find({isHot:1}); 
-     const cityCode = await getAllCode(params,  "city"); 
-     console.log(city);
+     const cityCode = await getAllCode(params,  "city");  
+     console.log(cityCode);
      const allPosition = await getAllCode([1], "position");
      const urls = [];
      const paramlist =[];
@@ -23,6 +23,10 @@
              urls.push(`https://www.zhipin.com/c${itemc}-p${itemp}/?page=1&ka=page-1`);
          });
      });
+     // 将url放入redis中//启动爬取进程
+     ctx.workprocess.send({message:'干活了',type:2});
+
+     
      ctx.body=urls;
      //对所有的urls进行链式处理boss直聘对访问ip限制非常小，所以使用一个处理完之后在处理的方法，以后进行修改
     //  const finallResult = urls.reduce(function(result,url){

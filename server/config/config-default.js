@@ -6,6 +6,6 @@
         // redis配置路径
         redis: {
             port: 6379, // Redis 端口
-            host: '127.0.0.1', // Redis 地址  
+            host: '192.168.17.180', // Redis 地址  
         }
     }
