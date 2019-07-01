@@ -66,8 +66,4 @@ workprocess.on("message",(m) => {
     console.log("子进程已经成功登陆");
 });
 
-//
-workprocess.send({
-    message: "1111111111111111111",
-    type:1,
-});
+ 
