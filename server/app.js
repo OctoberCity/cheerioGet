@@ -10,6 +10,10 @@ const config = require("./config/config-default");
 const chat = require("./util/chat");
 const process = require("child_process");
 const workprocess = process.fork("./util/chrriomainprocess.js");
+
+const Redis = require("ioredis"); 
+const redis = new Redis(config.redis);
+
 mongoose.connect('mongodb://192.168.17.180:27018/bishe2'); //docker mongo容器
 // 错误处理
 app.use((ctx, next) => {
@@ -44,6 +48,7 @@ app.use(koaBody({
 app.use(async (ctx, next) => {
     ctx.config = config;
     ctx.workprocess = workprocess;
+    ctx.redis =redis;
     await next();
 });
 
@@ -60,10 +65,14 @@ chat(server);
 
 
 
-// 与子进程同信
-
+// 与子进程同信 
 workprocess.on("message",(m) => {
     console.log("子进程已经成功登陆");
 });
 
+//启动继续爬取工作 
+workprocess.send({
+    message: '有新的点单来了',
+    type: 3
+}); 
  

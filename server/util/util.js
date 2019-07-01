@@ -4,7 +4,7 @@ const AnyModel = require("../model/index");
 
 
 //插入每个页面的信息职位的信息
-exports.insertOnePageInfo = async (sres,city,position) => {
+exports.insertOnePageInfo = async (sres,city,position) => { 
     const $ = cheerio.load(sres.text);
     const items = [];
     $('.job-list li').each(function (idx, element) {
@@ -23,6 +23,9 @@ exports.insertOnePageInfo = async (sres,city,position) => {
         infoObj.hrinfo.push($element.find('.info-publis img').attr('src'));
         items.push(infoObj);
     }); 
+    // 判断是不是有下一页
+    const haveNoNext =$('.page .next').hasClass("disabled"); 
+    const current= $('.page .cur').html();
     const workposModel = new AnyModel('workpos');
     const hrModel = new AnyModel('hr');
     const companyModel = new AnyModel('company');
@@ -30,10 +33,17 @@ exports.insertOnePageInfo = async (sres,city,position) => {
     items.forEach(async(item) => { 
         datalist.push(insertCheerioData(item,workposModel,hrModel,companyModel,city,position));
      });
-     return Promise.all(datalist);
+     return Promise.all(datalist).then((result)=>{
+         return {
+             tasklen:result.length,
+             haveNoNext,
+             nextpage:haveNoNext?null:`https://www.zhipin.com/c${city}-p${position}/?page=${++current}&ka=page-${++current}`,
+             key:`${params.city}_${params.position}`
+         }
+     });
 }
     // 插入数据库操作
-function insertCheerioData(item,workposModel,hrModel,companyModel,city,position){ 
+function insertCheerioData(item,workposModel,hrModel,companyModel,city,position){  
         return  companyModel.insertMany({
             companyname: item.companyname,
             companyarea: item.jobInfo[0],
@@ -56,7 +66,7 @@ function insertCheerioData(item,workposModel,hrModel,companyModel,city,position)
                 name:item.name,
                 slary:item.slary,
                 experience:item.jobInfo[1],
-                diploma:item.jobInfo[1],
+                diploma:item.jobInfo[2],
                 positioncode:position
 
             }); 
