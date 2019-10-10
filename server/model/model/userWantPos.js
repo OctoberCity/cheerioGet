@@ -5,7 +5,7 @@ var userWantPosSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    citycode:{
+    citycode: {
         type: Number
     },
     slary: {
@@ -18,7 +18,7 @@ var userWantPosSchema = new mongoose.Schema({
         type: Number
     }
 });
- 
+
 var userWantPosModel = mongoose.model("userwantpos", userWantPosSchema);
 //将这个模型暴露出去
 module.exports = userWantPosModel;
