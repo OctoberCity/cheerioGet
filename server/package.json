@@ -26,9 +26,11 @@
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.0",
     "mysql2": "^1.7.0",
+    "node-uuid": "^1.4.8",
     "nodemon": "^1.18.9",
     "sequelize": "^5.19.5",
     "socket.io": "^2.2.0",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "uniqueid": "^1.0.0"
   }
 }
