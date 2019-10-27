@@ -18,8 +18,8 @@ class anyModel {
         }); 
     }  
     find(option) {
-        return new Promise((resolve, reject) => {
-            this.model.find(option, (error, doc) => {
+        return new Promise((resolve, reject) => { 
+            this.model.find(option, (error, doc) => {  
                 if (error) {
                     reject(error);
                 }
@@ -64,6 +64,7 @@ class anyModel {
             this.model.find(option)
                 .populate(popOption)
                 .exec((err,data)=>{ 
+                    console.log(err);
                     if(err)reject(err);
                      resolve(data);
                 }); 

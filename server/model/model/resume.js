@@ -5,7 +5,7 @@ var resumeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    resumeName:{
+    resumeName: {
         type: String
     },
     uploadTime: {
@@ -23,7 +23,7 @@ var resumeSchema = new mongoose.Schema({
         type: String
     }
 });
- 
+
 var resumeModel = mongoose.model("resume", resumeSchema);
 //将这个模型暴露出去
 module.exports = resumeModel;

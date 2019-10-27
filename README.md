@@ -61,6 +61,11 @@ https://www.zhipin.com/job_detail/?query=node.js&scity=100010000&industry=&posit
 ![](https://github.com/OctoberCity/cheerioGet/blob/develop/doc/image/mytable.png)
 
 
+###### 关于进程爬取部分
+因为看了朴灵的《九浅一深node》,其中进程的学习收货很大，所以打算用多进程的方式去爬取数据，将爬取数据和vue端获取数据的逻辑分开，
+目前也只是fork一个进程去做爬取，但是其他细节还需完善
+
+
 
 
 
